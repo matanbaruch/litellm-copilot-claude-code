@@ -44,7 +44,7 @@ This project provides a Docker-based LiteLLM proxy that routes API requests thro
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `LITELLM_PORT` | `4000` | Port for the proxy server |
-| `LITELLM_MASTER_KEY` | `sk-litellm-master-key` | API key for authenticating with the proxy |
+| `LITELLM_MASTER_KEY` | `sk-12345678` | API key for authenticating with the proxy |
 
 ### Claude Code Integration
 
@@ -54,7 +54,7 @@ Add to your Claude Code settings (`~/.claude/settings.json`):
 {
   "apiProvider": "litellm",
   "litellmBaseUrl": "http://localhost:4000/v1",
-  "litellmApiKey": "sk-litellm-master-key",
+  "litellmApiKey": "sk-12345678",
   "model": "claude-sonnet-4.5"
 }
 ```
@@ -63,7 +63,7 @@ Or use environment variables:
 
 ```bash
 export ANTHROPIC_BASE_URL=http://localhost:4000/v1
-export ANTHROPIC_API_KEY=sk-litellm-master-key
+export ANTHROPIC_API_KEY=sk-12345678
 ```
 
 ## Available Models

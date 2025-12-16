@@ -9,7 +9,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_FILE="${SCRIPT_DIR}/litellm_config.yaml"
 CONTAINER_NAME="litellm-proxy"
 PORT="${LITELLM_PORT:-4000}"
-MASTER_KEY="${LITELLM_MASTER_KEY:-sk-litellm-master-key}"
+MASTER_KEY="${LITELLM_MASTER_KEY:-sk-12345678}"
 
 # Token storage directory (mounted for OAuth persistence)
 TOKEN_DIR="${HOME}/.config/litellm/github_copilot"
