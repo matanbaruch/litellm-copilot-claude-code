@@ -64,6 +64,8 @@ Or use environment variables:
 ```bash
 export ANTHROPIC_BASE_URL=http://localhost:4000/v1
 export ANTHROPIC_API_KEY=sk-12345678
+export ANTHROPIC_MODEL=claude-sonnet-4.5
+export ANTHROPIC_SMALL_FAST_MODEL=claude-haiku-4.5
 ```
 
 ## Available Models
