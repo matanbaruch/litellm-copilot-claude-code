@@ -84,16 +84,7 @@ echo ""
 echo "=================================================="
 echo -e "${GREEN}Claude Code Configuration${NC}"
 echo "=================================================="
-echo "Add to your Claude Code settings (~/.claude/settings.json):"
-echo ""
-echo '{
-  "apiProvider": "litellm",
-  "litellmBaseUrl": "http://localhost:'$PORT'/v1",
-  "litellmApiKey": "'$MASTER_KEY'",
-  "model": "claude-sonnet-4.5"
-}'
-echo ""
-echo "Or use environment variables:"
+echo "Use environment variables:"
 echo "  export ANTHROPIC_BASE_URL=http://localhost:$PORT/v1"
 echo "  export ANTHROPIC_API_KEY=$MASTER_KEY"
 echo "  export ANTHROPIC_MODEL=claude-sonnet-4.5"

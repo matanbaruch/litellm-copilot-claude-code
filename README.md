@@ -48,18 +48,7 @@ This project provides a Docker-based LiteLLM proxy that routes API requests thro
 
 ### Claude Code Integration
 
-Add to your Claude Code settings (`~/.claude/settings.json`):
-
-```json
-{
-  "apiProvider": "litellm",
-  "litellmBaseUrl": "http://localhost:4000/v1",
-  "litellmApiKey": "sk-12345678",
-  "model": "claude-sonnet-4.5"
-}
-```
-
-Or use environment variables:
+Use environment variables:
 
 ```bash
 export ANTHROPIC_BASE_URL=http://localhost:4000/v1
