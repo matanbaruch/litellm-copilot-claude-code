@@ -95,7 +95,7 @@ if [ -z "$TOKEN_FILE" ]; then
         if echo "$LOGS" | grep -qi "device\|code\|github.com/login"; then
             echo -e "${GREEN}Authentication required!${NC}"
             echo ""
-            echo "$LOGS" | grep -iE "(code|device|github.com/login|enter|verify)" | head -10
+            echo "$LOGS" | grep -iE "(code|device|github.com/login|enter|verify)"
             echo ""
             echo -e "${YELLOW}Please visit: ${NC}${GREEN}https://github.com/login/device${NC}"
             echo ""

@@ -17,6 +17,7 @@ This project provides a Docker-based LiteLLM proxy that routes API requests thro
 ## Prerequisites
 
 - Docker installed and running
+- Claude code is installed (`curl -fsSL https://claude.ai/install.sh | bash`)
 - GitHub account with an active Copilot subscription
 
 ## Quick Start
@@ -57,6 +58,11 @@ export ANTHROPIC_MODEL=claude-sonnet-4.5
 export ANTHROPIC_SMALL_FAST_MODEL=claude-haiku-4.5
 ```
 
+Then run
+```bash
+claude
+```
+
 ## Available Models
 
 ### General Availability
@@ -71,12 +77,18 @@ export ANTHROPIC_SMALL_FAST_MODEL=claude-haiku-4.5
 - `gemini-3-pro`
 - `raptor-mini`
 
-## Health Check
+## Troubleshooting
 
 Verify the proxy is running:
 
 ```bash
 curl http://localhost:4000/health
+```
+
+Verify Github Authentication
+
+```bash
+docker logs litellm-proxy
 ```
 
 ## License
