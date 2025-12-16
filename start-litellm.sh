@@ -70,17 +70,53 @@ echo -e "${GREEN}Master Key: $MASTER_KEY${NC}"
 echo ""
 echo -e "${GREEN}LiteLLM proxy started successfully!${NC}"
 echo ""
-echo "=================================================="
-echo -e "${YELLOW}IMPORTANT: First-time GitHub Copilot Authentication${NC}"
-echo "=================================================="
-echo "1. Watch the container logs for the device code:"
-echo "   docker logs -f $CONTAINER_NAME"
-echo ""
-echo "2. When you see a device code, visit:"
-echo "   https://github.com/login/device"
-echo ""
-echo "3. Enter the code to authenticate with GitHub Copilot"
-echo ""
+
+# Check if this is first-time authentication (no token file exists)
+TOKEN_FILE=$(find "$TOKEN_DIR" -name "*.json" 2>/dev/null | head -1)
+
+if [ -z "$TOKEN_FILE" ]; then
+    echo "=================================================="
+    echo -e "${YELLOW}IMPORTANT: First-time GitHub Copilot Authentication${NC}"
+    echo "=================================================="
+    echo ""
+    echo -e "${YELLOW}Waiting for device code from container logs...${NC}"
+    echo ""
+
+    # Wait for container to start and look for device code
+    MAX_WAIT=60
+    WAITED=0
+    DEVICE_CODE=""
+
+    while [ $WAITED -lt $MAX_WAIT ]; do
+        # Look for device code in logs
+        LOGS=$(docker logs "$CONTAINER_NAME" 2>&1)
+
+        # Try to extract device code (usually appears as a code like XXXX-XXXX)
+        if echo "$LOGS" | grep -qi "device\|code\|github.com/login"; then
+            echo -e "${GREEN}Authentication required!${NC}"
+            echo ""
+            echo "$LOGS" | grep -iE "(code|device|github.com/login|enter|verify)" | head -10
+            echo ""
+            echo -e "${YELLOW}Please visit: ${NC}${GREEN}https://github.com/login/device${NC}"
+            echo ""
+            echo -e "${YELLOW}Enter the code shown above to authenticate with GitHub Copilot${NC}"
+            break
+        fi
+
+        sleep 2
+        WAITED=$((WAITED + 2))
+    done
+
+    if [ $WAITED -ge $MAX_WAIT ]; then
+        echo -e "${YELLOW}Could not detect device code automatically.${NC}"
+        echo "Please check the logs manually:"
+        echo "  docker logs -f $CONTAINER_NAME"
+        echo ""
+        echo "Then visit: https://github.com/login/device"
+    fi
+    echo ""
+fi
+
 echo "=================================================="
 echo -e "${GREEN}Claude Code Configuration${NC}"
 echo "=================================================="
